@@ -12,6 +12,7 @@ class Message extends Component {
       return <span key={key} className="label label-warning">{label}</span>
     })
     return (
+      <>
       <div className={`row message ${read} ${selected}`}>
         <div className="col-1">
           <div className="row">
@@ -33,16 +34,18 @@ class Message extends Component {
           {labels}
           <span>{this.props.subject}</span>
         </div>
-        <div onClick={() => this.setState(prev => {
-          return {
-            class: prev.class === 'hide' ? 'show' : 'hide'
-            }
-          })} className={`row message-body ${this.state.class}`}>
-          <div className="col-11 col-offset-1">
-            {this.props.body}
-          </div>
+      </div>
+
+      <div onClick={() => this.setState(prev => {
+        return {
+          class: prev.class === 'hide' ? 'show' : 'hide'
+          }
+        })} className={`row message-body ${this.state.class}`}>
+        <div className="col-11 offset-sm-1">
+          {this.props.body}
         </div>
       </div>
+      </>
     );
   }
 }
