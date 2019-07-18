@@ -24,7 +24,7 @@ class Toolbar extends Component {
       <div className="row toolbar">
         <div className="col-md-12">
           <p className="pull-right">
-            <span className="badge badge">{this.props.unRead}</span>
+            <span className="badge badge-pill badge-default">{this.props.unRead}</span>
             unread {this.props.unRead === 1 ? 'message' : 'messages'}
           </p>
 

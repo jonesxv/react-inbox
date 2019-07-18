@@ -61,6 +61,11 @@
   margin-bottom: .5em;
 }
 
+.badge-pill {
+  background: #777777;
+  color: white;
+}
+
 footer.spacer {
   margin-bottom: 20em;
 }
