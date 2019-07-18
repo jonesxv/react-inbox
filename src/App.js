@@ -336,24 +336,29 @@ class App extends React.Component {
     }, 0)
 
     return (
-      <div className="App container">
-        <Toolbar 
-          deselectAll={this.deselectAll}
-          selectAll={this.selectAll}
-          someSelected={someSelected}
-          allSelected={allSelected}
-          markRead={this.markRead}
-          markUnRead={this.markUnRead}
-          applyLabel={this.applyLabel}
-          removeLabel={this.removeLabel}
-          deleteMessage={this.deleteMessage}
-          unRead={unRead}
-          updateSendMessage={this.updateSendMessage}
-          />
-        <Compose
-          sendMessage={this.state.sendMessage}
-          handleSubmit={this.sendMessage} />
-        <Messages toggleStar={this.toggleStar} toggleCheck={this.toggleCheck} messages={this.state.messages} />
+      <div className="App">
+        <nav class="navbar navbar-light bg-light">
+          <span class="navbar-brand mb-0 h1 offset-sm-1">React Inbox</span>
+        </nav>
+        <div className="container">
+          <Toolbar 
+            deselectAll={this.deselectAll}
+            selectAll={this.selectAll}
+            someSelected={someSelected}
+            allSelected={allSelected}
+            markRead={this.markRead}
+            markUnRead={this.markUnRead}
+            applyLabel={this.applyLabel}
+            removeLabel={this.removeLabel}
+            deleteMessage={this.deleteMessage}
+            unRead={unRead}
+            updateSendMessage={this.updateSendMessage}
+            />
+          <Compose
+            sendMessage={this.state.sendMessage}
+            handleSubmit={this.sendMessage} />
+          <Messages toggleStar={this.toggleStar} toggleCheck={this.toggleCheck} messages={this.state.messages} />
+        </div>
       </div>
     );
   }
