@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 class Message extends Component {
+  state = {
+    class: 'hide'
+  }
   render() {
     const read = this.props.read ? 'read' : 'unread'
     const starred = this.props.starred ? 'fa-star': 'fa-star-o'
@@ -22,9 +25,22 @@ class Message extends Component {
           </div>
         </div>
 
-        <div className="col-11">
+        <div onClick={() => this.setState(prev => {
+          return {
+            class: prev.class === 'hide' ? 'show' : 'hide'
+            }
+          })} className="col-11">
           {labels}
           <span>{this.props.subject}</span>
+        </div>
+        <div onClick={() => this.setState(prev => {
+          return {
+            class: prev.class === 'hide' ? 'show' : 'hide'
+            }
+          })} className={`row message-body ${this.state.class}`}>
+          <div className="col-11 col-offset-1">
+            {this.props.body}
+          </div>
         </div>
       </div>
     );

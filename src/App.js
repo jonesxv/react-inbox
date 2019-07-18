@@ -30,17 +30,37 @@ class App extends React.Component {
   }
 
   toggleStar = id => {
-    this.setState(prevState => {
-      return { messages: prevState.messages.map(message => {
-        if (message.id === id) {
-          return {
-            ...message,
-            starred: !message.starred
+    var options = { 
+      method: 'PATCH',
+      url: url,
+      headers: { 
+        'cache-control': 'no-cache',
+        Connection: 'keep-alive',
+        'content-length': '44',
+        'accept-encoding': 'gzip, deflate',
+        Host: 'localhost:8082',
+        'Cache-Control': 'no-cache',
+        Accept: '*/*',
+        
+        'Content-Type': 'application/json' },
+      body: { command: 'star', messageIds: [id] },
+      json: true 
+    };
+
+    request(options, (error, response, body) => {
+      if (error) throw new Error(error);
+      this.setState(prevState => {
+        return { messages: prevState.messages.map(message => {
+          if (message.id === id) {
+            return {
+              ...message,
+              starred: !message.starred
+            }
+          } else {
+            return message
           }
-        } else {
-          return message
-        }
-      }) };
+        }) };
+      });
     });
   }
 
@@ -67,73 +87,194 @@ class App extends React.Component {
   }
 
   markRead = () => {
-    this.setState(prevState => {
-      return { messages: prevState.messages.map(message => {
-        if (message.selected) {
-          return {
-            ...message,
-            read: true
+    const selected = this.state.messages.filter(message => {
+      return message.selected
+    }).map(message => message.id)
+    console.log(selected)
+    var options = { 
+      method: 'PATCH',
+      url: url,
+      headers: { 
+        'cache-control': 'no-cache',
+        Connection: 'keep-alive',
+        'content-length': '44',
+        'accept-encoding': 'gzip, deflate',
+        Host: 'localhost:8082',
+        'Cache-Control': 'no-cache',
+        Accept: '*/*',
+        
+        'Content-Type': 'application/json' },
+      body: { command: 'read', read: true, messageIds: selected },
+      json: true 
+    };
+
+    request(options, (error, response, body) => {
+      if (error) throw new Error(error);
+      console.log(body)
+      this.setState(prevState => {
+        return { messages: prevState.messages.map(message => {
+          if (message.selected) {
+            return {
+              ...message,
+              read: true
+            }
+          } else {
+            return message
           }
-        } else {
-          return message
-        }
-      }) };
+        }) };
+      });
     });
   }
 
   markUnRead = () => {
-    this.setState(prevState => {
-      return { messages: prevState.messages.map(message => {
-        if (message.selected) {
-          return {
-            ...message,
-            read: false
+    const selected = this.state.messages.filter(message => {
+      return message.selected
+    }).map(message => message.id)
+    console.log(selected)
+    var options = { 
+      method: 'PATCH',
+      url: url,
+      headers: { 
+        'cache-control': 'no-cache',
+        Connection: 'keep-alive',
+        'content-length': '44',
+        'accept-encoding': 'gzip, deflate',
+        Host: 'localhost:8082',
+        'Cache-Control': 'no-cache',
+        Accept: '*/*',
+        
+        'Content-Type': 'application/json' },
+      body: { command: 'read', read: false, messageIds: selected },
+      json: true 
+    };
+
+    request(options, (error, response, body) => {
+      if (error) throw new Error(error);
+      this.setState(prevState => {
+        return { messages: prevState.messages.map(message => {
+          if (message.selected) {
+            return {
+              ...message,
+              read: false
+            }
+          } else {
+            return message
           }
-        } else {
-          return message
-        }
-      }) };
+        }) };
+      });
     });
   }
 
   applyLabel = label => {
-    this.setState(prevState => {
-      return { messages: prevState.messages.map(message => {
-        if (message.selected) {
-          return {
-            ...message,
-            labels: message.labels.indexOf(label) === -1 ? [...message.labels, label] : message.labels
+    const selected = this.state.messages.filter(message => {
+      return message.selected
+    }).map(message => message.id)
+    console.log(selected)
+    var options = { 
+      method: 'PATCH',
+      url: url,
+      headers: { 
+        'cache-control': 'no-cache',
+        Connection: 'keep-alive',
+        'content-length': '44',
+        'accept-encoding': 'gzip, deflate',
+        Host: 'localhost:8082',
+        'Cache-Control': 'no-cache',
+        Accept: '*/*',
+        
+        'Content-Type': 'application/json' },
+      body: { command: 'addLabel', label: label, messageIds: selected },
+      json: true 
+    };
+
+    request(options, (error, response, body) => {
+      if (error) throw new Error(error);
+      this.setState(prevState => {
+        return { messages: prevState.messages.map(message => {
+          if (message.selected) {
+            return {
+              ...message,
+              labels: message.labels.indexOf(label) === -1 ? [...message.labels, label] : message.labels
+            }
+          } else {
+            return message
           }
-        } else {
-          return message
-        }
-      }) };
+        }) };
+      });
     });
   }
 
   removeLabel = label => {
-    this.setState(prevState => {
-      return { messages: prevState.messages.map(message => {
-        if (message.selected) {
-          return {
-            ...message,
-            labels: message.labels.filter(item => {
-              return item !== label
-            })
+    const selected = this.state.messages.filter(message => {
+      return message.selected
+    }).map(message => message.id)
+    console.log(selected)
+    var options = { 
+      method: 'PATCH',
+      url: url,
+      headers: { 
+        'cache-control': 'no-cache',
+        Connection: 'keep-alive',
+        'content-length': '44',
+        'accept-encoding': 'gzip, deflate',
+        Host: 'localhost:8082',
+        'Cache-Control': 'no-cache',
+        Accept: '*/*',
+        
+        'Content-Type': 'application/json' },
+      body: { command: 'removeLabel', label: label, messageIds: selected },
+      json: true 
+    };
+
+    request(options, (error, response, body) => {
+      if (error) throw new Error(error);
+      this.setState(prevState => {
+        return { messages: prevState.messages.map(message => {
+          if (message.selected) {
+            return {
+              ...message,
+              labels: message.labels.filter(item => {
+                return item !== label
+              })
+            }
+          } else {
+            return message
           }
-        } else {
-          return message
-        }
-      }) };
+        }) };
+      });
     });
+
   }
 
-  deleteMessage = id => {
-    this.setState(prevState => {
-      return { messages: prevState.messages.filter(message => {
-        return message.id !== id
-      }) };
-    });
+  deleteMessage = () => {
+    const selected = this.state.messages.filter(message => {
+      return message.selected
+    }).map(message => message.id)
+    var options = { 
+      method: 'PATCH',
+      url: url,
+      headers: { 
+        'cache-control': 'no-cache',
+        Connection: 'keep-alive',
+        'content-length': '44',
+        'accept-encoding': 'gzip, deflate',
+        Host: 'localhost:8082',
+        'Cache-Control': 'no-cache',
+        Accept: '*/*',
+        
+        'Content-Type': 'application/json' },
+      body: { command: 'delete', messageIds: selected },
+      json: true 
+    };
+
+    request(options, (error, response, body) => {
+      if (error) throw new Error(error);
+      this.setState(prevState => {
+        return { messages: prevState.messages.filter(message => {
+          return !selected.includes(message.id)
+        }) };
+      });
+    }); 
   }
 
   updateSendMessage = () => {
@@ -156,15 +297,16 @@ class App extends React.Component {
         Host: 'localhost:8082',
         'Cache-Control': 'no-cache',
         Accept: '*/*',
-        'User-Agent': 'PostmanRuntime/7.13.0',
         'Content-Type': 'application/json' },
       body: { subject: subject, body: body },
       json: true 
     };
 
-    request(options, function (error, response, body) {
+    request(options, (error, response, body) => {
       if (error) throw new Error(error);
-      console.log(body)
+      this.setState(prevState => {
+        return { messages: [...prevState.messages, {...body, selected: false} ] };
+      });
     });
   }
 
