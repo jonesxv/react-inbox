@@ -5,7 +5,7 @@
   "dependencies": {
     "bootstrap": "^3.4.1",
     "font-awesome": "^4.7.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^3.1.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "reactstrap": "^8.0.1"
